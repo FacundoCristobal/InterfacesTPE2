@@ -44,6 +44,9 @@ input:focus {
 nav {
     padding: .5rem;
     background-color: var(--primary);
+    position: fixed;
+    width: 100%;
+    z-index: 1;
 }
 
 .brand {
@@ -210,4 +213,44 @@ footer li {
 .mediaLinks i::before {
     width: 1.5rem;
     height: 1.5rem;
+}
+
+/*------------FOOTER----------*/
+
+.heroBackground {
+    width: 99vw;
+    height: 100vh;
+    
+}
+
+.bg-lanzamiento {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rd-proximamente {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 5rem;
+    left: 2rem;
+    width: 25vw;
+}
+
+.rd-logo {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.texto-prox {
+    width: 10vw;
+}
+
+.rg-logo {
+    width: 5vw;
+    position: absolute;
+    bottom: 1rem;
+    left: 2rem;
 }
