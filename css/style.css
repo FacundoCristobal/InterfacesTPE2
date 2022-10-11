@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600 &display=swap');
 :root {
     --base: #1E142A;
     --base-light: #2D1E3F;
@@ -36,7 +36,7 @@ input:focus {
 }
 
 .horizontalMargin {
-    margin: 0 .5rem;
+    margin: 0 0.5rem;
 }
 
 .roundedCorners {
@@ -47,15 +47,20 @@ main {
     background: linear-gradient(var(--base-light), var(--base));
 }
 
+button {
+    cursor: pointer;
+}
+
 
 /*------------NAVBAR----------*/
 
 nav {
-    padding: .5rem;
+    padding: 0.5rem;
     background-color: var(--primary);
     position: fixed;
     width: 100%;
-    z-index: 1;
+    z-index: 3;
+    top: 0;
 }
 
 .brand {
@@ -75,32 +80,37 @@ nav {
 
 .burgerButton {
     width: 30px;
-    height: 30px;
+    height: 20px;
     display: flex;
+    position: relative;
     align-items: center;
-    justify-content: center;
 }
 
 .burgerIcon,
 .burgerIcon::before,
 .burgerIcon::after {
     display: block;
-    position: relative;
     width: 100%;
     height: 2px;
     background-color: white;
     border-radius: 5px;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    z-index: 2;
 }
 
 .burgerIcon::before,
 .burgerIcon::after {
     content: '';
     position: absolute;
-    top: -.5rem;
+}
+
+.burgerIcon::before {
+    transform: translate(0, 0.5rem);
 }
 
 .burgerIcon::after {
-    top: .5rem;
+    transform: translate(0, -0.5rem);
 }
 
 .navbar ul {
@@ -110,9 +120,27 @@ nav {
 
 .searchbar {
     background-color: var(--primary-light);
-    padding: .5rem;
+    padding: 0.5rem;
     color: #fafafa;
     width: 25rem;
+    border-radius: 0 5px 5px 0;
+}
+
+.searchBarContainer {
+    position: relative;
+    display: none;
+}
+
+.buscarLabel {
+    display: flex;
+    position: absolute;
+    left: 0;
+    transform: translate(-100%, 0);
+    align-items: center;
+    height: 100%;
+    background-color: var(--primary-light);
+    border-radius: 5px 0 0 5px;
+    padding: 0 0.5rem;
 }
 
 .searchbar::placeholder {
@@ -130,6 +158,121 @@ nav {
     border-radius: 50%;
 }
 
+.burgerCheckbox {
+    display: none;
+}
+
+.burgerCheckbox:checked~label span {
+    background-color: transparent;
+}
+
+.burgerCheckbox:checked~label span::before {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+.burgerCheckbox:checked~label span::after {
+    transform: rotate(45deg);
+    bottom: 0;
+}
+
+
+/*------------Menu---------------*/
+
+.sideMenu {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    z-index: -1;
+    box-sizing: border-box;
+}
+
+.sideMenuVisible {
+    z-index: 2;
+}
+
+menu {
+    background-color: var(--primary);
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform: scaleX(0);
+    transition: all 0.3s ease-out;
+    transform-origin: left;
+    width: 100%;
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    left: -100%;
+    transition: background-color 0.3s ease-out;
+}
+
+.visibleBackground {
+    background-color: #222c;
+    left: 0;
+}
+
+.visible {
+    transform: scaleX(1);
+}
+
+menu li {
+    margin: 0.5rem 0;
+}
+
+.categorias {
+    display: flex;
+    flex-wrap: wrap;
+    height: 40%;
+    position: relative;
+    padding: 1rem 5rem;
+}
+
+menu h4 {
+    font-size: 1.5rem;
+    border-bottom: 1px solid white;
+    box-sizing: border-box;
+    width: 90%;
+    padding: 1rem 0;
+}
+
+.categorias li {
+    width: 50%;
+}
+
+.mainLinks {
+    width: 90%;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.mainLinks ul {
+    width: 100%;
+    text-align: start;
+}
+
+.mainLinks li {
+    margin: 1rem 0;
+    padding: 0.2rem;
+    border-bottom: 2px solid white;
+    width: 100%;
+}
+
+menu .mediaLinks {
+    align-self: flex-end;
+    margin-right: 2rem;
+}
+
 
 /*------------RECOMENDADOS----------*/
 
@@ -138,16 +281,20 @@ h1 {
     background-color: var(--base-light);
     padding: 2rem;
     border-bottom: 1px solid white;
+    width: 100%;
+    font-size: 1.8rem;
+    box-sizing: border-box;
 }
 
 .recomendados {
     padding: 2rem 10%;
+    margin: 3rem;
 }
 
 .recomendaciones {
     display: grid;
     grid-template-areas: 'main main a b' 'main main c d';
-    grid-gap: .5rem;
+    grid-gap: 0.5rem;
 }
 
 .recomendaciones a:first-child {
@@ -185,8 +332,8 @@ h1 {
     width: 100%;
     bottom: 0;
     background-color: #222c;
-    padding: .6rem;
-    font-size: .8rem;
+    padding: 0.6rem;
+    font-size: 0.8rem;
     box-sizing: border-box;
 }
 
@@ -220,7 +367,7 @@ footer h4 {
 }
 
 footer li {
-    font-size: .8rem;
+    font-size: 0.8rem;
     font-weight: 200;
     margin: 1rem 0;
 }
@@ -231,7 +378,7 @@ footer li {
 }
 
 .copyright {
-    font-size: .6rem;
+    font-size: 0.6rem;
     text-align: center;
 }
 
@@ -244,15 +391,15 @@ footer li {
 }
 
 .mediaLinks li {
-    margin: .5rem;
+    margin: 0.5rem;
     transform: scale(1.3);
 }
 
-.mediaLinks i::before {
-    width: 1.5rem;
-    height: 1.5rem;
+.mediaLinks li i {
+    color: white;
 }
 
+<<<<<<< HEAD
 /*------------Proximo Lanzamiento----------*/
 
 #body-lanzamiento {
@@ -261,6 +408,24 @@ footer li {
 
 .heroBackground {
     width: 100%;
+=======
+.recomendaciones a img,
+.mediaLinks li i {
+    transition: all 0.2s ease-out;
+}
+
+.mediaLinks li i:hover {
+    color: var(--secondary);
+    text-shadow: 0 0 1px var(--secondary);
+}
+
+
+/*------------FOOTER----------*/
+
+.heroBackground {
+    width: 99vw;
+    height: 100vh;
+>>>>>>> 838ea12c0b80602ccf71fa01769bd33ee0042ef9
 }
 
 .bg-proximoLanzamiento {
@@ -305,6 +470,7 @@ footer li {
     left: 2rem;
 }
 
+<<<<<<< HEAD
 .reservaButton {
     color: white;
     background-color: var(--secondary);
@@ -345,12 +511,14 @@ footer li {
     text-align: center;
     order: 2;
 }
+=======
+>>>>>>> 838ea12c0b80602ccf71fa01769bd33ee0042ef9
 
 /*-------CAROUSEL------*/
 
 .sliderContainer {
     height: 20rem;
-    padding: .5rem;
+    padding: 0.5rem;
     margin: auto;
     overflow-x: scroll;
     position: relative;
@@ -410,7 +578,13 @@ footer li {
     border-radius: 5px;
     position: relative;
     background-color: var(--primary);
-    margin: 0 .5rem;
+    margin: 0 0.5rem;
+    transition: all 0.2s ease-out;
+}
+
+.card:hover,
+.recomendaciones a img:hover {
+    box-shadow: 0 0 5px var(--primary-light);
 }
 
 .freeCard {
@@ -421,10 +595,12 @@ footer li {
     height: 50%;
     width: 100%;
     object-fit: cover;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .card h4 {
-    margin: .5rem;
+    margin: 0.5rem;
 }
 
 .card ul {
@@ -434,7 +610,7 @@ footer li {
 }
 
 .card ul li {
-    font-size: .8rem;
+    font-size: 0.8rem;
     color: var(--secondary);
 }
 
@@ -455,4 +631,97 @@ footer li {
 
 .cardButtons span {
     margin: auto;
+}
+
+
+/*---------PROXIMO LANZAMIENTO----------*/
+
+.proximoLanzamiento {
+    margin-top: 3rem;
+}
+
+.proximoLanzamiento h1,
+.runecraftContainer h1 {
+    background-color: transparent;
+}
+
+.proximoLanzamiento ul {
+    display: grid;
+    grid-template-areas: 'main main a' 'main main b' 'main main c';
+    grid-gap: 0.5rem;
+    padding: 2rem 0;
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+}
+
+.proximoLanzamiento ul li:first-child {
+    grid-area: main;
+}
+
+.proximoLanzamiento ul li:nth-child(2) {
+    grid-area: a;
+}
+
+.proximoLanzamiento ul li:nth-child(3) {
+    grid-area: b;
+}
+
+.proximoLanzamiento ul li:nth-child(4) {
+    grid-area: c;
+}
+
+.proximoLanzamiento ul li img {
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/*---------4 en linea plug-------*/
+
+.juegaOnline {
+    padding: 2rem 15%;
+}
+
+.juegaOnline h3 {
+    font-size: 1.5rem;
+}
+
+.juegoAdv {
+    display: flex;
+}
+
+.runecraftDescripcion {
+    padding: 2rem;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 50%;
+    text-align: center;
+}
+
+.runecraftDescripcion button {
+    padding: 0.6rem;
+    width: 60%;
+    background-color: var(--secondary);
+    font-size: 1.5rem;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.2s ease-out;
+}
+
+.runecraftDescripcion button:hover {
+    background-color: white;
+    color: var(--secondary);
+    box-shadow: 0 0 5px white;
+}
+
+@media(min-width: 800px) {
+    menu {
+        width: 30%;
+    }
+    .searchBarContainer {
+        display: block;
+    }
 }

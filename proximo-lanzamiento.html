@@ -13,23 +13,58 @@
 <body id="body-lanzamiento">
     <nav class="navbar">
         <ul>
-            <li class="brand">
-                <div class="burgerButton horizontalMargin">
-                    <span class="burgerIcon"></span>
-                </div>
-                <img class="logo" src="assets/logo.png" alt="logo DotGames">
+            <li class="brand"> <input type="checkbox" name="burgerMenu" class="burgerCheckbox" id="burgerCheckbox"> <label for="burgerCheckbox" class="burgerButton horizontalMargin"> <span class="burgerIcon"> </span> </label>
+                <a href="index.html"><img class="logo" src="assets/logo.png" alt="logo DotGames"></a>
             </li>
+            <li class="searchBarContainer"><label class="buscarLabel" for="buscar"><i class="fa fa-search"></i></label> <input type="text" class="searchbar" placeholder="Buscar" id="buscar"> </li>
             <li>
-                <input type="text" class="searchbar roundedCorners" placeholder="Buscar">
-            </li>
-            <li>
-                <div class="userMenu">
-                    <img class="profilePic horizontalMargin" src="assets/user.png" alt="profile picture">
-                    <a href="#">Log out</a>
-                </div>
+                <div class="userMenu"> <img class="profilePic horizontalMargin" src="assets/user.png" alt="profile picture"> <a href="#">Log out</a> </div>
             </li>
         </ul>
     </nav>
+
+    <div class="sideMenu" id="sideMenu">
+        <div class="background" id="background"></div>
+        <menu id="menu">
+            <div class="mainLinks">
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Trending</a></li>
+                    <li><a href="#">Nuevos</a></li>
+                    <li><a href="#">Update</a></li>
+                </ul>
+            </div>
+            <h4>Categorias</h4>
+            <ul class="categorias">
+                <li><a href="#">Shooter</a></li>
+                <li><a href="#">Acción</a></li>
+                <li><a href="#">Fantasía</a></li>
+                <li><a href="#">RPG</a></li>
+                <li><a href="#">Estrategia</a></li>
+                <li><a href="#">Depórte</a></li>
+                <li><a href="#">Shooter</a></li>
+                <li><a href="#">Acción</a></li>
+                <li><a href="#">Fantasía</a></li>
+                <li><a href="#">RPG</a></li>
+                <li><a href="#">Estrategia</a></li>
+                <li><a href="#">Depórte</a></li>
+            </ul>
+            <ul class="mediaLinks">
+                <li>
+                    <a href="#"> <i class="fab fa-facebook-square fa-lg"></i> </a>
+                </li>
+                <li>
+                    <a href="#"> <i class="fab fa-twitter-square fa-lg"></i> </a>
+                </li>
+                <li>
+                    <a href="#"> <i class="fab fa-twitch fa-lg"></i> </a>
+                </li>
+                <li>
+                    <a href="#"> <i class="fab fa-instagram fa-lg"></i> </a>
+                </li>
+            </ul>
+        </menu>
+    </div>
 
     <section class="heroBackground">
         <img class="bg-proximoLanzamiento" src="assets/proximo-lanzamiento/bg1.jpg" alt="fondo red dead">
@@ -75,6 +110,10 @@
 
     </section>
 
+    <!-- <section class="heroBackground"> <img class="bg-lanzamiento" src="assets/proximo-lanzamiento/bgx.jpg" alt="fondo red dead">
+        <div class="rd-proximamente"> <img class="rd-logo" src="assets/proximo-lanzamiento/rdr2 logo.png" alt="rdr2 logo"> <img class="texto-prox" src="assets/proximo-lanzamiento/proximamente.png" alt="subtitulo rd logo"> </div> <img class="rg-logo" src="assets/proximo-lanzamiento/rg2.png"
+            alt="rockstar games logo"> </section> -->
+
     <footer>
         <div class="footerContainer">
             <div class="footerNav">
@@ -111,36 +150,23 @@
                 <h4>redes</h4>
                 <ul class="mediaLinks">
                     <li>
-                        <a href="#">
-                            <i class="fab fa-facebook-square fa-lg"></i>
-                        </a>
-
+                        <a href="#"> <i class="fab fa-facebook-square fa-lg"></i> </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fab fa-twitter-square fa-lg"></i>
-                        </a>
-
+                        <a href="#"> <i class="fab fa-twitter-square fa-lg"></i> </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fab fa-twitch fa-lg"></i>
-                        </a>
-
+                        <a href="#"> <i class="fab fa-twitch fa-lg"></i> </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fab fa-instagram fa-lg"></i>
-                        </a>
-
+                        <a href="#"> <i class="fab fa-instagram fa-lg"></i> </a>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="copyright">© 2022 DOTGAMES Corporation. Todos los derechos reservados. Todas las marcas registradas pertenecen a sus respectivos dueños en EE. UU. y otros países. Todos los precios incluyen IVA (donde sea aplicable).</div>
     </footer>
-
-    <script src="script/script.js"></script>
+    <script src="script/navbar.js"></script>
 </body>
 
 </html>
