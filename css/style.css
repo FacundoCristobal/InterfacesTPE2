@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600 &display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap');
 :root {
     --base: #1E142A;
     --base-light: #2D1E3F;
@@ -399,16 +399,6 @@ footer li {
     color: white;
 }
 
-<<<<<<< HEAD
-/*------------Proximo Lanzamiento----------*/
-
-#body-lanzamiento {
-    background-color: black;
-}
-
-.heroBackground {
-    width: 100%;
-=======
 .recomendaciones a img,
 .mediaLinks li i {
     transition: all 0.2s ease-out;
@@ -420,12 +410,14 @@ footer li {
 }
 
 
-/*------------FOOTER----------*/
+/*------------Proximo Lanzamiento----------*/
+
+#body-lanzamiento {
+    background-color: black;
+}
 
 .heroBackground {
-    width: 99vw;
-    height: 100vh;
->>>>>>> 838ea12c0b80602ccf71fa01769bd33ee0042ef9
+    width: 100%;
 }
 
 .bg-proximoLanzamiento {
@@ -470,7 +462,6 @@ footer li {
     left: 2rem;
 }
 
-<<<<<<< HEAD
 .reservaButton {
     color: white;
     background-color: var(--secondary);
@@ -505,14 +496,14 @@ footer li {
     transform: translate(-50%, -50%);
 }
 
+.descripcion-card:nth-of-type()
+
 .descripcion-card p {
     padding-left: 10rem;
     width: 20vw;
     text-align: center;
     order: 2;
 }
-=======
->>>>>>> 838ea12c0b80602ccf71fa01769bd33ee0042ef9
 
 /*-------CAROUSEL------*/
 
