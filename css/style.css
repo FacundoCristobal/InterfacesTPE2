@@ -253,6 +253,15 @@ menu h4 {
     box-sizing: border-box;
 }
 
+.mainLinks i {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
 .mainLinks ul {
     width: 100%;
     text-align: start;
@@ -559,6 +568,7 @@ footer li {
     padding: 0.8rem;
     font-size: 1rem;
     background-color: var(--secondary);
+    min-width: 50%;
 }
 
 .cardButtons span {
