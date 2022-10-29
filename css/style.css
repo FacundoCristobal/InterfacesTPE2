@@ -496,12 +496,43 @@ footer li {
 
 .descripcion-card {
     display: flex;
+    width: 60vw;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 135%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 4px 4px 4px rgba(0,0,0,1);
+}
+
+.descripcion-card img, .descripcion-card-2 img{
+    padding: 3rem;
+}
+
+.descripcion-card-2 {
+    display: flex;
+    width: 60vw;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 200%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 4px 4px 4px rgba(0,0,0,1);
+}
+
+.descripcion-card-3 {
+    display: flex;
+    width: 40vw;
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 150%;
+    top: 250%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    text-shadow: 4px 4px 4px rgba(0,0,0,1);
 }
 
 .descripcion-card:nth-of-type() .descripcion-card p {
@@ -509,6 +540,37 @@ footer li {
     width: 20vw;
     text-align: center;
     order: 2;
+}
+
+.personajes-container {
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+    justify-content: space-between;
+    position: absolute;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    top: 260%;
+    left: 11%;
+}
+
+.personaje-card {
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+}
+
+.personaje-card img {
+    padding-right: 2rem;
+}
+
+.info-personaje p {
+    padding: 1rem;
+}
+
+.pie-lanzamiento {
+    padding-top: 30%;
 }
 
 
