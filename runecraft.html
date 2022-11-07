@@ -115,106 +115,121 @@
             <li>Runecraft/</li>
         </ul>
     </div>
-    <div class="RunecraftGame">
-        <div class="gameContainer">
-            <div class="social">
-                <ul>
-                    <ul class="mediaLinks">
-                        <li>
-                            <a href="#"> <i class="fab fa-facebook-square fa-lg"></i> </a>
-                        </li>
-                        <li>
-                            <a href="#"> <i class="fab fa-twitter-square fa-lg"></i> </a>
-                        </li>
-                        <li>
-                            <a href="#"> <i class="fab fa-twitch fa-lg"></i> </a>
-                        </li>
-                        <li>
-                            <a href="#"> <i class="fab fa-instagram fa-lg"></i> </a>
-                        </li>
+    <main>
+        <div class="RunecraftGame">
+            <div class="gameContainer">
+                <div class="social">
+                    <ul>
+                        <ul class="mediaLinks">
+                            <li>
+                                <a href="#"> <i class="fab fa-facebook-square fa-lg"></i> </a>
+                            </li>
+                            <li>
+                                <a href="#"> <i class="fab fa-twitter-square fa-lg"></i> </a>
+                            </li>
+                            <li>
+                                <a href="#"> <i class="fab fa-twitch fa-lg"></i> </a>
+                            </li>
+                            <li>
+                                <a href="#"> <i class="fab fa-instagram fa-lg"></i> </a>
+                            </li>
+                        </ul>
                     </ul>
-                </ul>
-            </div>
-            <img src="assets/runecraft/Group 64.png" alt="game">
-        </div>
-    </div>
-    <div class="instructions">
-        <div class="mediaInstructions">
-            <img class="videoGameplay" src="assets/runecraft/video.png" alt="videoGameplay">
-            <div class="instructionsRow">
-                <img src="assets/runecraft/gallery1.png" alt="runecraft image 1">
-                <img src="assets/runecraft/gallery2.png" alt="runecraft image 2">
-                <img src="assets/runecraft/gallery3.png" alt="runecraft image 3">
-            </div>
-        </div>
-        <div class="tutorial">
-            <h4>Runecraft</h4>
-            <ul>
-                <li>
-                    2 Jugadores
-                </li>
-                <li>
-                    Estrategia por turnos
-                </li>
-            </ul>
-            <p>
-                El objetivo del juego es utilizar tus pilares y los de tu oponente para conectar 4 pilares en linea recta y activar su magia escondida
-            </p>
-            <img src="assets/runecraft/tutorialIllust.png" alt="tutorial illustration">
-        </div>
-    </div>
-    <div class="commentsSection">
+                </div>
+                <div class="overlay">
+                    <canvas id="juego" width="854" height="480"></canvas>
+                    <div class="menu">
+                        <div>
+                            <ul>
+                                <li>jugador1</li>
 
-        <div class="comments">
-            <h2>Comentarios</h2>
-            <div class="comment">
-                <div class="commentId">
-                    <div class="userId">
-                        <img src="assets/user.png" alt="profile picture">
-                        <p>FabriTutorialesHD</p>
+                                <li>tiempo</li>
+
+                                <li>jugador2</li>
+                            </ul>
+                        </div>
                     </div>
-                    <p class="timeStamp">hace 1 hora</p>
                 </div>
-                <div class="commentContent">
-                    <p>Esto no es un Lorem, ipsum.</p>
-                </div>
-            </div>
-            <div class="comment">
-                <div class="commentId">
-                    <div class="userId">
-                        <img src="assets/user.png" alt="profile picture">
-                        <p>xXCristianGamerXx</p>
-                    </div>
-                    <p class="timeStamp">hace 3 horas</p>
-                </div>
-                <div class="commentContent">
-                    <p>Ta weno, lo voy a llevar al Media Lab.</p>
-                </div>
-            </div>
-            <div class="comment">
-                <div class="commentId">
-                    <div class="userId">
-                        <img src="assets/user.png" alt="profile picture">
-                        <p>JavierRomeroLegit</p>
-                    </div>
-                    <p class="timeStamp">hace 5 hora</p>
-                </div>
-                <div class="commentContent">
-                    <p>Si esto fuera un TP de la facu los apruebo al toque </p>
-                </div>
-            </div>
-            <div class="commentInput">
-                <h4>Comentar</h4>
-                <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Agregar un comentario..."></textarea>
             </div>
         </div>
-        <div class="recommended">
-            <h3>Juegos parecidos</h3>
-            <img src="assets/runecraft/recomendado1.png" alt="recomendado 1">
-            <img src="assets/runecraft/recomendado2.png" alt="recomendado 2">
-            <img src="assets/runecraft/recomendado3.png" alt="recomendado 3">
+        <div class="instructions">
+            <div class="mediaInstructions">
+                <img class="videoGameplay" src="assets/runecraft/video.png" alt="videoGameplay">
+                <div class="instructionsRow">
+                    <img src="assets/runecraft/gallery1.png" alt="runecraft image 1">
+                    <img src="assets/runecraft/gallery2.png" alt="runecraft image 2">
+                    <img src="assets/runecraft/gallery3.png" alt="runecraft image 3">
+                </div>
+            </div>
+            <div class="tutorial">
+                <h4>Runecraft</h4>
+                <ul>
+                    <li>
+                        2 Jugadores
+                    </li>
+                    <li>
+                        Estrategia por turnos
+                    </li>
+                </ul>
+                <p>
+                    El objetivo del juego es utilizar tus pilares y los de tu oponente para conectar 4 pilares en linea recta y activar su magia escondida
+                </p>
+                <img src="assets/runecraft/tutorialIllust.png" alt="tutorial illustration">
+            </div>
         </div>
-    </div>
+        <div class="commentsSection">
+
+            <div class="comments">
+                <h2>Comentarios</h2>
+                <div class="comment">
+                    <div class="commentId">
+                        <div class="userId">
+                            <img src="assets/user.png" alt="profile picture">
+                            <p>FabriTutorialesHD</p>
+                        </div>
+                        <p class="timeStamp">hace 1 hora</p>
+                    </div>
+                    <div class="commentContent">
+                        <p>Esto no es un Lorem, ipsum.</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <div class="commentId">
+                        <div class="userId">
+                            <img src="assets/user.png" alt="profile picture">
+                            <p>xXCristianGamerXx</p>
+                        </div>
+                        <p class="timeStamp">hace 3 horas</p>
+                    </div>
+                    <div class="commentContent">
+                        <p>Ta weno, lo voy a llevar al Media Lab.</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <div class="commentId">
+                        <div class="userId">
+                            <img src="assets/user.png" alt="profile picture">
+                            <p>JavierRomeroLegit</p>
+                        </div>
+                        <p class="timeStamp">hace 5 hora</p>
+                    </div>
+                    <div class="commentContent">
+                        <p>Si esto fuera un TP de la facu los apruebo al toque </p>
+                    </div>
+                </div>
+                <div class="commentInput">
+                    <h4>Comentar</h4>
+                    <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Agregar un comentario..."></textarea>
+                </div>
+            </div>
+            <div class="recommended">
+                <h3>Juegos parecidos</h3>
+                <img src="assets/runecraft/recomendado1.png" alt="recomendado 1">
+                <img src="assets/runecraft/recomendado2.png" alt="recomendado 2">
+                <img src="assets/runecraft/recomendado3.png" alt="recomendado 3">
+            </div>
+        </div>
+    </main>
     <footer>
         <div class="footerContainer">
             <div class="footerNav">
@@ -276,7 +291,7 @@
         <div class="copyright">© 2022 DOTGAMES Corporation. Todos los derechos reservados. Todas las marcas registradas pertenecen a sus respectivos dueños en EE. UU. y otros países. Todos los precios incluyen IVA (donde sea aplicable).</div>
     </footer>
     <script src="script/navbar.js"></script>
-    <script src="script/carousel.js"></script>
+    <script src="script/cuatroEnLinea.js"></script>
 </body>
 
 </html>

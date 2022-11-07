@@ -503,10 +503,11 @@ footer li {
     top: 135%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-shadow: 4px 4px 4px rgba(0,0,0,1);
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 1);
 }
 
-.descripcion-card img, .descripcion-card-2 img{
+.descripcion-card img,
+.descripcion-card-2 img {
     padding: 3rem;
 }
 
@@ -519,7 +520,7 @@ footer li {
     top: 200%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-shadow: 4px 4px 4px rgba(0,0,0,1);
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 1);
 }
 
 .descripcion-card-3 {
@@ -532,7 +533,7 @@ footer li {
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 1.5rem;
-    text-shadow: 4px 4px 4px rgba(0,0,0,1);
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 1);
 }
 
 .descripcion-card:nth-of-type() .descripcion-card p {
@@ -807,6 +808,7 @@ footer li {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    box-sizing: border-box;
 }
 
 .gameContainer .mediaLinks {
@@ -869,6 +871,7 @@ footer li {
     display: flex;
     align-items: left;
     padding: 2rem;
+    box-sizing: border-box;
 }
 
 .commentsSection h2 {
@@ -948,6 +951,25 @@ footer li {
 
 .commentInput textarea:focus {
     outline: none;
+}
+
+.overlay {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+.menu {
+    position: absolute;
+    width: 100%;
+    top: .2rem;
+}
+
+.menu ul {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
 }
 
 @media(min-width: 800px) {
