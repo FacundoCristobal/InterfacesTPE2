@@ -108,36 +108,36 @@ window.onload = () => {
 
     const boardTiles = {
         board: [
-            '../assets/juego/background_tiles/tablero1.png',
-            '../assets/juego/background_tiles/tablero2.png',
-            '../assets/juego/background_tiles/tablero3.png',
-            '../assets/juego/background_tiles/tablero4.png',
+            document.getElementById("tablero1").src,
+            document.getElementById("tablero2").src,
+            document.getElementById("tablero3").src,
+            document.getElementById("tablero4").src,
         ],
         background: [
-            '../assets/juego/background_tiles/bg1.png',
-            '../assets/juego/background_tiles/bg2.png',
-            '../assets/juego/background_tiles/bg3.png',
-            '../assets/juego/background_tiles/bg4.png',
-            '../assets/juego/background_tiles/bg5.png',
-            '../assets/juego/background_tiles/bg6.png',
+            document.getElementById("bg1").src,
+            document.getElementById("bg2").src,
+            document.getElementById("bg3").src,
+            document.getElementById("bg4").src,
+            document.getElementById("bg5").src,
+            document.getElementById("bg6").src,
         ],
         base: [
-            '../assets/juego/background_tiles/11.png',
-            '../assets/juego/background_tiles/12.png',
-            '../assets/juego/background_tiles/13.png',
-            '../assets/juego/background_tiles/21.png',
-            '../assets/juego/background_tiles/22.png',
-            '../assets/juego/background_tiles/23.png',
-            '../assets/juego/background_tiles/31.png',
-            '../assets/juego/background_tiles/32.png',
-            '../assets/juego/background_tiles/33.png',
+            document.getElementById("11").src,
+            document.getElementById("12").src,
+            document.getElementById("13").src,
+            document.getElementById("21").src,
+            document.getElementById("22").src,
+            document.getElementById("23").src,
+            document.getElementById("31").src,
+            document.getElementById("32").src,
+            document.getElementById("33").src,
         ]
     }
 
     const PlayerPiece = {
-        jugador1: '../assets/juego/background_tiles/jugador1.png',
-        jugador2: '../assets/juego/background_tiles/jugador2.png',
-        whiteRunes: '../assets/juego/background_tiles/light_runes.png',
+        jugador1: document.getElementById("jugador1").src,
+        jugador2: document.getElementById("jugador2").src,
+        whiteRunes: document.getElementById("light_runes").src,
     }
 
     let whiteRunes = new Image();
