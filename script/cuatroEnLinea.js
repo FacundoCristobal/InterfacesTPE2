@@ -95,7 +95,7 @@ function changePlayer() {
 function gameOver(player, { firstElement, winSecuence }) {
     currentGhostPiece = null;
     gameOverContainer.classList.toggle('invisible');
-    if (timeLeft == 0) {
+    if (timeLeft <= 0) {
         gameOverMessage.innerHTML = 'La partida resulto en un';
         gameOverWinnerDisplay.innerHTML = 'Empate';
     } else {
