@@ -3,16 +3,107 @@
 const canvas = document.querySelector('#juego');
 const ctx = canvas.getContext('2d');
 
-let isRunning = true;
+let nEnLinea = 4;
+const selectedDificulty = document.querySelector('#nEnLinea');
+const menuDificultyDisplay = document.querySelector('#nEnLineaDisplay');
+const timerDisplay = document.querySelector('#time');
+menuDificultyDisplay.innerHTML = selectedDificulty.value;
+selectedDificulty.addEventListener('change', () => {
+    menuDificultyDisplay.innerHTML = selectedDificulty.value;
+    nEnLinea = parseInt(selectedDificulty.value);
+})
+
+const inputNameJ1 = document.querySelector('#nameJugador1');
+const inputNameJ2 = document.querySelector('#nameJugador2');
+
+const gameOverContainer = document.querySelector('#gameOver');
+const gameOverMessage = document.querySelector('#result');
+const gameOverWinnerDisplay = document.querySelector('#winner');
+
+const startButton = document.querySelector('#start');
+const startMenu = document.querySelector("#gameInit");
+const gameOverlay = document.querySelector('#gameOverlay');
+const j1NameDisplay = document.querySelector('#j1Name');
+const j2NameDisplay = document.querySelector('#j2Name');
+
+const restartButton = document.querySelector('#restart');
+
+restartButton.addEventListener('click', () => {
+    gameOverContainer.classList.toggle('invisible');
+    startMenu.classList.toggle('invisible');
+})
+
+startButton.addEventListener('click', () => {
+
+    isRunning = true;
+
+    timeLeft = parseInt(document.querySelector('input[name="timer"]:checked').value);
+
+    timerController = window.setInterval(() => {
+        timeLeft--;
+    }, 1000);
+
+    canvas.width = (nEnLinea + 3 + 6) * tileSize * sizeFactor;
+    canvas.height = (nEnLinea + 2 + 6) * tileSize * sizeFactor;
+
+    gameBackground = new Background({ wBoard: nEnLinea + 3, hBoard: nEnLinea + 2 });
+    gameBoard = new Board({ position: { x: tileSize * sizeFactor * 3, y: tileSize * sizeFactor * 3 }, wBoard: nEnLinea + 3, hBoard: nEnLinea + 2 });
+    player1 = new Player({ name: inputNameJ1.value, pieces: PlayerPiece.jugador1 });
+    player2 = new Player({ name: inputNameJ2.value, pieces: PlayerPiece.jugador2 });
+    baseBlue = new PlayerBase({ position: { x: 0, y: 0 }, player: player1 });
+    baseRed = new PlayerBase({ position: { x: (nEnLinea + 6) * tileSize * sizeFactor, y: 0 }, player: player2 });
+    player1.addBase(baseBlue);
+    player2.addBase(baseRed);
+    currentPlayer = player1;
+    j1NameDisplay.classList.add('currentPlayer');
+
+    animate();
+    startMenu.classList.add('invisible');
+    gameOverlay.classList.remove('invisible');
+    j1NameDisplay.innerHTML = inputNameJ1.value;
+    j2NameDisplay.innerHTML = inputNameJ2.value;
+
+});
+
+let isRunning = false;
 
 const tileSize = 32;
 const sizeFactor = 1;
-let nEnLinea = 4;
+let timeLeft;
+
+
+let fadeTick = -0.5;
 
 canvas.width = (nEnLinea + 3 + 6) * tileSize * sizeFactor;
 canvas.height = (nEnLinea + 2 + 6) * tileSize * sizeFactor;
 
 let currentPlayer;
+let currentPiece;
+let currentMouseMove;
+
+function changePlayer() {
+    (currentPlayer == player1) ? currentPlayer = player2: currentPlayer = player1;
+    if (currentPlayer == player1) {
+        j1NameDisplay.classList.add('currentPlayer');
+        j2NameDisplay.classList.remove('currentPlayer');
+    } else {
+        j1NameDisplay.classList.remove('currentPlayer');
+        j2NameDisplay.classList.add('currentPlayer');
+    }
+}
+
+function gameOver(player, { firstElement, winSecuence }) {
+    currentGhostPiece = null;
+    gameOverContainer.classList.toggle('invisible');
+    if (timeLeft == 0) {
+        gameOverMessage.innerHTML = 'La partida resulto en un';
+        gameOverWinnerDisplay.innerHTML = 'Empate';
+    } else {
+        gameOverMessage.innerHTML = 'El ganador es';
+        gameOverWinnerDisplay.innerHTML = player.name;
+    }
+
+}
 
 const boardTiles = {
     board: [
@@ -45,7 +136,12 @@ const boardTiles = {
 const PlayerPiece = {
     jugador1: '../assets/juego/background_tiles/jugador1.png',
     jugador2: '../assets/juego/background_tiles/jugador2.png',
+    whiteRunes: '../assets/juego/background_tiles/light_runes.png',
 }
+
+let whiteRunes = new Image();
+whiteRunes.src = PlayerPiece.whiteRunes;
+
 
 class Background {
     constructor({
@@ -84,6 +180,27 @@ class Background {
     }
 }
 
+let detectCollision = (mouseX, mouseY, objectX, objectY, objectW, objectH) => {
+    return (mouseX > objectX && mouseX < (objectX + objectW) && mouseY > objectY && mouseY < (objectY + objectH));
+}
+
+class MouseMovement {
+    constructor({
+        initialPosition,
+        initialPiecePosition,
+    }) {
+        this.initialPosition = initialPosition;
+        this.initialPiecePosition = initialPiecePosition;
+    }
+
+    calculateOffset(currentX, currentY) {
+        return {
+            x: this.initialPiecePosition.x + currentX - this.initialPosition.mouseX,
+            y: this.initialPiecePosition.y + currentY - this.initialPosition.mouseY,
+        }
+    }
+}
+
 class PlayerBase {
     constructor({
         position,
@@ -91,6 +208,15 @@ class PlayerBase {
     }) {
         this.position = position;
         this.player = player;
+        this.piece = new Piece({ position: { x: this.position.x + tileSize * sizeFactor, y: this.position.y }, player: player });
+    }
+
+    tookPiece(mouseX, mouseY) {
+        return detectCollision(mouseX, mouseY, this.position.x + tileSize * sizeFactor, this.position.y, tileSize * sizeFactor, tileSize * sizeFactor * 2);
+    }
+
+    getNewPiece() {
+        this.piece = new Piece({ position: { x: this.position.x + tileSize * sizeFactor, y: this.position.y }, player: this.player });
     }
 
     draw() {
@@ -111,6 +237,20 @@ class PlayerBase {
                 )
             }
         }
+        this.piece.draw();
+        if (this.player == currentPlayer) {
+            ctx.drawImage(
+                whiteRunes,
+                0,
+                0,
+                tileSize,
+                tileSize * 2,
+                this.piece.position.x,
+                this.piece.position.y,
+                tileSize * sizeFactor,
+                tileSize * sizeFactor * 2,
+            )
+        }
     }
 }
 
@@ -120,6 +260,7 @@ class Board {
         wBoard = 7,
         hBoard = 6,
     }) {
+        this.highlightingColumns = false;
         this.position = position;
         this.wBoard = wBoard;
         this.hBoard = hBoard;
@@ -158,6 +299,8 @@ class Board {
             }
 
         }
+        this.highlightingColumns ? this.highlightColumns() : null;
+        if (currentGhostPiece) currentGhostPiece.draw();
         this.drawPieces();
     }
 
@@ -180,17 +323,21 @@ class Board {
                 }
             });
             this.pieces[col].push(newPiece);
-            (currentPlayer == player1) ? currentPlayer = player2: currentPlayer = player1;
             this.checkWinCondition();
+
+            changePlayer();
         }
     }
 
     checkWinCondition() {
+        let firstElement;
+        let winSecuence;
         for (let col = 0; col < this.pieces.length; col++) {
             this.pieces[col].forEach((piece, pos) => {
                 if (!isRunning) {
                     return;
                 }
+
                 let toTop = 1;
                 let nextPos = pos + 1;
                 while (this.pieces[col][nextPos] && this.pieces[col][nextPos].player == piece.player && toTop < nEnLinea) {
@@ -199,7 +346,15 @@ class Board {
                 }
                 if (toTop == nEnLinea) {
                     isRunning = false;
-                    alert('gano ' + piece.player.name);
+                    firstElement = {
+                        col: col,
+                        row: nextPos,
+                    }
+                    winSecuence = 'toTop';
+                    gameOver(currentPlayer, {
+                        firstElement: firstElement,
+                        winSecuence: winSecuence,
+                    });
                     return;
                 }
                 let toRight = 1;
@@ -210,7 +365,15 @@ class Board {
                 }
                 if (toRight == nEnLinea) {
                     isRunning = false;
-                    alert('gano ' + piece.player.name);
+                    firstElement = {
+                        col: nextCol,
+                        row: pos,
+                    }
+                    winSecuence = 'toRight';
+                    gameOver(currentPlayer, {
+                        firstElement: firstElement,
+                        winSecuence: winSecuence,
+                    });
                     return;
                 }
                 let toTopRight = 1;
@@ -220,11 +383,18 @@ class Board {
                     nextColX++;
                     nextPosX++;
                     toTopRight++;
-                    console.log(toTopRight);
                 }
                 if (toTopRight == nEnLinea) {
                     isRunning = false;
-                    alert('gano ' + piece.player.name);
+                    firstElement = {
+                        col: nextColX,
+                        row: nextPosX,
+                    }
+                    winSecuence = 'toTopRight';
+                    gameOver(currentPlayer, {
+                        firstElement: firstElement,
+                        winSecuence: winSecuence,
+                    });
                     return;
                 }
                 let toTopLeft = 1;
@@ -234,15 +404,34 @@ class Board {
                     nextColY--
                     nextPosY++;
                     toTopLeft++;
-                    console.log(toTopLeft);
                 }
                 if (toTopLeft == nEnLinea) {
                     isRunning = false;
-                    alert('gano ' + piece.player.name);
+                    firstElement = {
+                        col: nextColY,
+                        row: nextPosY,
+                    }
+                    winSecuence = 'toTopLeft';
+                    gameOver(currentPlayer, {
+                        firstElement: firstElement,
+                        winSecuence: winSecuence,
+                    });
                     return;
                 }
             })
         }
+    }
+
+    highlightColumns() {
+        let startPosition = tileSize * sizeFactor * 3;
+        for (let i = 0; i < this.wBoard; i++) {
+            ctx.fillStyle = '#22fa2220';
+            ctx.fillRect(startPosition + 2 + (i * tileSize * sizeFactor), 3 * tileSize * sizeFactor + 2, 28, (this.hBoard * tileSize * sizeFactor) - 6);
+        }
+    }
+
+    isOnBoard(mouseX, mouseY) {
+        return (mouseX > 3 * tileSize * sizeFactor && mouseX < ((3 + this.wBoard) * tileSize * sizeFactor) && mouseY > 3 * tileSize * sizeFactor && mouseY < (3 + this.hBoard) * tileSize * sizeFactor);
     }
 }
 
@@ -254,6 +443,11 @@ class Player {
         this.name = name;
         this.pieces = new Image();
         this.pieces.src = pieces;
+        this.base;
+    }
+
+    addBase(base) {
+        this.base = base;
     }
 }
 
@@ -281,13 +475,41 @@ class Piece {
     }
 }
 
-let gameBackground = new Background({ wBoard: nEnLinea + 3, hBoard: nEnLinea + 2 });
-let gameBoard = new Board({ position: { x: tileSize * sizeFactor * 3, y: tileSize * sizeFactor * 3 }, wBoard: nEnLinea + 3, hBoard: nEnLinea + 2 });
-let player1 = new Player({ name: 'pedro', pieces: PlayerPiece.jugador1 });
-let player2 = new Player({ name: 'juan', pieces: PlayerPiece.jugador2 });
-let baseBlue = new PlayerBase({ position: { x: 0, y: 0 }, player: player1 });
-let baseRed = new PlayerBase({ position: { x: (nEnLinea + 6) * tileSize * sizeFactor, y: 0 }, player: player2 });
-currentPlayer = player1;
+class GhostPiece {
+    constructor({
+        position,
+        player,
+    }) {
+        this.position = position;
+        this.player = player;
+    }
+
+    draw() {
+        ctx.globalAlpha = Math.abs(fadeTick) + 0.2;
+        ctx.drawImage(
+            this.player.pieces,
+            0,
+            0,
+            tileSize,
+            tileSize * 2,
+            this.position.x,
+            this.position.y,
+            tileSize * sizeFactor,
+            tileSize * sizeFactor * 2,
+        )
+        ctx.globalAlpha = 1;
+    }
+}
+
+let winner;
+let gameBackground;
+let gameBoard;
+let player1;
+let player2;
+let baseBlue;
+let baseRed;
+let currentGhostPiece;
+let timerController;
 
 function animate() {
 
@@ -298,8 +520,20 @@ function animate() {
     gameBoard.draw();
     baseBlue.draw();
     baseRed.draw();
+    timerDisplay.innerHTML = timeLeft;
+    fadeTick = (fadeTick >= 0.5) ? +(fadeTick = -0.5) : (fadeTick = fadeTick + 0.015);
+
     if (!isRunning) {
+        window.clearInterval(timerController);
         return;
+    }
+
+    if (timeLeft <= 0) {
+        isRunning = false;
+        gameOver(currentPlayer, {
+            firstElement: null,
+            winSecuence: null,
+        });
     }
 };
 
@@ -312,8 +546,6 @@ function pause() {
     isRunning = false;
 }
 
-animate();
-
 canvas.addEventListener('mousedown', (e) => {
     if (!isRunning) {
         return;
@@ -321,8 +553,56 @@ canvas.addEventListener('mousedown', (e) => {
     let mouseX = e.layerX - e.target.offsetLeft;
     let mouseY = e.layerY - e.target.offsetTop;
 
-    if (mouseX > gameBoard.boardXStart && mouseX < gameBoard.boardXEnd && mouseY > gameBoard.boardYStart && mouseY < gameBoard.boardYEnd) {
-        gameBoard.addPiece({ player: currentPlayer, position: { x: mouseX - gameBoard.boardXStart, y: mouseY - gameBoard.boardYStart } });
+    if (baseBlue.tookPiece(mouseX, mouseY) && currentPlayer == player1) {
+        currentPiece = baseBlue.piece;
+        currentMouseMove = new MouseMovement({ initialPosition: { mouseX, mouseY }, initialPiecePosition: { x: currentPiece.position.x, y: currentPiece.position.y } });
+    }
 
+    if (baseRed.tookPiece(mouseX, mouseY) && currentPlayer == player2) {
+        currentPiece = baseRed.piece;
+        currentMouseMove = new MouseMovement({ initialPosition: { mouseX, mouseY }, initialPiecePosition: { x: currentPiece.position.x, y: currentPiece.position.y } });
     }
 })
+
+canvas.addEventListener('mousemove', (e) => {
+    if (!isRunning || !currentMouseMove) {
+        return;
+    }
+
+    let mouseX = e.layerX - e.target.offsetLeft;
+    let mouseY = e.layerY - e.target.offsetTop;
+
+    let offset = currentMouseMove.calculateOffset(mouseX, mouseY);
+    currentPiece.position = offset;
+
+
+    let centerOfPieceX = currentPiece.position.x + ((tileSize * sizeFactor) / 2);
+    let centerOfPieceY = currentPiece.position.y + (tileSize * sizeFactor);
+
+    if (gameBoard.isOnBoard(centerOfPieceX, centerOfPieceY)) {
+        let hitColumn = Math.floor((centerOfPieceX - (3 * tileSize * sizeFactor)) / (tileSize * sizeFactor));
+        if (gameBoard.pieces[hitColumn].length < gameBoard.hBoard) {
+            currentGhostPiece = new GhostPiece({ player: currentPlayer, position: { x: gameBoard.boardXStart + (hitColumn * tileSize * sizeFactor), y: ((1 + gameBoard.hBoard) * tileSize * sizeFactor) - (gameBoard.pieces[hitColumn].length * tileSize * sizeFactor) } })
+        } else { currentGhostPiece = null };
+    } else { currentGhostPiece = null };
+
+});
+
+canvas.addEventListener('mouseup', (e) => {
+    if (!isRunning || !currentMouseMove) {
+        return;
+    }
+
+    let centerOfPieceX = currentPiece.position.x + ((tileSize * sizeFactor) / 2);
+    let centerOfPieceY = currentPiece.position.y + (tileSize * sizeFactor);
+
+    if (gameBoard.isOnBoard(centerOfPieceX, centerOfPieceY)) {
+        let hitColumn = Math.floor((centerOfPieceX - (3 * tileSize * sizeFactor)) / gameBoard.wBoard);
+        currentPlayer.base.getNewPiece();
+        gameBoard.addPiece({ player: currentPlayer, position: { x: centerOfPieceX - gameBoard.boardXStart, y: centerOfPieceY - gameBoard.boardYStart } });
+    } else {
+        currentPlayer.base.getNewPiece();
+    }
+    currentMouseMove = null;
+    currentPiece = null;
+});

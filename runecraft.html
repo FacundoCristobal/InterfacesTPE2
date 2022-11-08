@@ -137,16 +137,64 @@
                     </ul>
                 </div>
                 <div class="overlay">
-                    <canvas id="juego" width="854" height="480"></canvas>
-                    <div class="menu">
-                        <div>
-                            <ul>
-                                <li>jugador1</li>
+                    <canvas class="juego" id="juego" width="854" height="480"></canvas>
+                    <div class="gameOverlay invisible" id="gameOverlay">
+                        <div id="time">00:00</div>
+                        <ul>
+                            <li class="playerName" id="j1Name">jugador1</li>
+                            <li class="playerName" id="j2Name">jugador2</li>
+                        </ul>
+                    </div>
+                    <div class="gameInit" id="gameInit">
+                        <ul>
+                            <li>
+                                <h2>Runecraft</h2>
+                            </li>
+                            <li>
+                                <label for="nameJugador1">Jugador 1</label>
+                                <input type="text" name="nameJugador1" id="nameJugador1" value="Jugador1" placeholder="nombre del jugador 1">
+                            </li>
 
-                                <li>tiempo</li>
+                            <li>
+                                <label for="nameJugador2">Jugador 2</label>
+                                <input type="text" name="nameJugador2" id="nameJugador2" value="Jugador2" placeholder="nombre del jugador 2">
+                            </li>
+                            <li>
+                                <label for="nEnLinea">Condicion de victoria</label>
+                                <input type="range" name="nEnLinea" id="nEnLinea" value="4" min="4" max="20">
+                                <p id="nEnLineaDisplay"></p>
+                            </li>
+                            <li>
+                                <h4 for="timer">Duracion de la partida</h4>
+                                <div class="timeOptions">
+                                    <div>
+                                        <input type="radio" name="timer" id="short" value="30" checked>
+                                        <label for="short">30</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="timer" id="medium" value="60">
+                                        <label for="medium">60</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="timer" id="long" value="120">
+                                        <label for="long">120</label>
+                                    </div>
 
-                                <li>jugador2</li>
-                            </ul>
+
+                                </div>
+
+                            </li>
+                            <li>
+                                <button id="start">Jugar</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="gameOver invisible" id="gameOver">
+                        <h2 id="result">El ganador es</h2>
+                        <p class="winner" id="winner">Pepito</p>
+                        <div class="restart" id="restart">
+                            <p>jugar de nuevo</p>
+                            <button>Restart</button>
                         </div>
                     </div>
                 </div>
@@ -172,7 +220,7 @@
                     </li>
                 </ul>
                 <p>
-                    El objetivo del juego es utilizar tus pilares y los de tu oponente para conectar 4 pilares en linea recta y activar su magia escondida
+                    El objetivo del juego es utilizar tus pilares y los de tu oponente para conectar la cantidad de pilares seleccionada en linea recta, de forma horizontal, vertical o en diagonal y asi activar su magia escondida
                 </p>
                 <img src="assets/runecraft/tutorialIllust.png" alt="tutorial illustration">
             </div>
