@@ -8,6 +8,10 @@ slider.addEventListener("mousedown", (e) => {
 
 let pos = { top: 0, left: 0, x: 0, y: 0 };
 
+window.setTimeout(() => {
+    loader.classList.add('invisible');
+}, 3000);
+
 const mouseDownHandler = function(e) {
     slider.style.cursor = "grabbing";
     slider.style.userSelect = "none";
