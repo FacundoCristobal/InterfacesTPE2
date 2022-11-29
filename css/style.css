@@ -215,6 +215,30 @@ menu {
     width: 100%;
 }
 
+.personaje-card img {
+    width: 17vw;
+}
+
+.smoke {
+    background-image: url(../assets/proximo-lanzamiento/smokesprite.png);
+    width: 128px;
+    height: 128px;
+    animation: smoke 6s steps(64) infinite;
+    transform: translateY(-130%) scaleX(12);
+    filter: sepia(1);
+}
+
+.smokeContainer {
+    justify-content: center;
+    display: flex;
+}
+
+menu>* {
+    opacity: 0;
+    transform: translate(-15px, 0px);
+    transition: all 300ms linear;
+}
+
 .background {
     width: 100%;
     height: 100%;
@@ -430,6 +454,41 @@ footer li {
 
 /*------------Proximo Lanzamiento----------*/
 
+.prox_lanzamiento_header {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prox_lanzamiento_header img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.prox_lanzamiento_header img.pl_char {
+    width: auto;
+    height: 90%;
+    object-fit: cover;
+    top: auto;
+    left: auto;
+    bottom: 0;
+    right: 2%;
+}
+
+.prox_lanzamiento_header .pl_logo {
+    height: 20%;
+    top: 10%;
+    width: auto;
+    position: fixed;
+}
+
 #body-lanzamiento {
     background-color: black;
 }
@@ -515,11 +574,11 @@ footer li {
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 1);
 }
 
-.descripcion-card p{
+.descripcion-card p {
     transform: scale(0.5);
 }
 
-.descripcion-card img{
+.descripcion-card img {
     padding: 3rem;
 }
 
@@ -631,6 +690,7 @@ footer li {
     padding: 0.5rem;
     margin: auto;
     overflow-x: scroll;
+    overflow-y: hidden;
     position: relative;
     border-radius: 5px;
 }
@@ -690,11 +750,21 @@ footer li {
     background-color: var(--primary);
     margin: 0 0.5rem;
     transition: all 0.2s ease-out;
+    cursor: pointer;
 }
 
-.card:hover,
-.recomendaciones a img:hover {
-    box-shadow: 0 0 5px var(--primary-light);
+.card .persepctiveController {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+
+.perspectiveContainer {
+    perspective: 10rem;
+    perspective-origin: 50% calc(50% - 2rem);
 }
 
 .freeCard {
@@ -1211,5 +1281,25 @@ footer li {
     }
     to {
         color: #fafafa;
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translate(-30px, 0px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px, 0px);
+    }
+}
+
+@keyframes smoke {
+    from {
+        background-position-x: 0px;
+    }
+    to {
+        background-position-x: -8192px;
     }
 }

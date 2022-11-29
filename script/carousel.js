@@ -1,6 +1,36 @@
 "use strict";
+
+
 const slider = document.getElementsByClassName("sliderContainer")[0];
 const slider2 = document.getElementsByClassName("sliderContainer")[1];
+const cards = document.querySelectorAll('.card');
+const maxRotation = 3;
+
+let rect;
+
+cards.forEach(card => {
+    card.addEventListener('mouseover', (e) => {
+        rect = card.getBoundingClientRect();
+    });
+    card.addEventListener('mousemove', e => {
+
+        let centerX = (rect.width / 2) + rect.x;
+        let centerY = (rect.height / 2) + rect.y;
+        let mouseX = e.x - centerX;
+        let mouseY = e.y - centerY;
+
+
+
+        let rotationX = (mouseX * maxRotation) / (rect.width / 2);
+        let rotationY = (mouseY * maxRotation) / (rect.height / 2);
+        card.style.transform = 'rotateX(' + -rotationY + 'deg) rotateY(' + rotationX + 'deg)';
+    });
+    card.addEventListener('mouseout', e => {
+        card.style.transform = '';
+    });
+})
+
+
 
 slider.addEventListener("mousedown", (e) => {
     mouseDownHandler(e);
