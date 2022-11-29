@@ -16,6 +16,10 @@
     font-family: 'Inter', sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 a {
     text-decoration: none;
 }
@@ -562,12 +566,15 @@ footer li {
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 1);
 }
 
-.descripcion-card img,
-.descripcion-card-2 img {
+.descripcion-card p{
+    transform: scale(0.5);
+}
+
+.descripcion-card img{
     padding: 3rem;
 }
 
-.descripcion-card-2 {
+.descripcion-card:nth-child(1) {
     display: flex;
     width: 60vw;
     justify-content: space-between;
@@ -628,6 +635,35 @@ footer li {
 
 .pie-lanzamiento {
     padding-top: 30%;
+}
+
+.hidden-card {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+.show-card {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+.personaje-card:nth-child(3) {
+    transition-delay: 200ms;
+}
+
+.personaje-card:nth-child(4) {
+    transition-delay: 200ms;
+}
+
+.personaje-card:nth-child(5) {
+    transition-delay: 400ms;
+}
+
+.personaje-card:nth-child(6) {
+    transition-delay: 400ms;
 }
 
 
