@@ -20,6 +20,11 @@ html {
     scroll-behavior: smooth;
 }
 
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
 a {
     text-decoration: none;
 }
@@ -567,6 +572,14 @@ footer li {
     display: flex;
     align-items: center;
     padding: 2rem;
+}
+
+.personaje-card h1 {
+    padding: 0;
+    background-color: transparent;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.3);
+    transform: translateX(-100%);
+    display: block;
 }
 
 .personaje-card img {
