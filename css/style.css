@@ -223,7 +223,10 @@ menu {
     filter: sepia(1);
 }
 
-.smokeContainer {}
+.smokeContainer {
+    justify-content: center;
+    display: flex;
+}
 
 menu>* {
     opacity: 0;
@@ -566,11 +569,11 @@ footer li {
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 1);
 }
 
-.descripcion-card p{
+.descripcion-card p {
     transform: scale(0.5);
 }
 
-.descripcion-card img{
+.descripcion-card img {
     padding: 3rem;
 }
 
