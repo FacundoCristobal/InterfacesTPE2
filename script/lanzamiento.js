@@ -32,10 +32,22 @@ const observerHistoria = new IntersectionObserver((entries, observer) => {
             observer.unobserve(entry.target);
         }
     })
-}, { threshold: 0.1})
+}, { threshold: 0, rootMargin: "200px"})
 
 // , { threshold: [0, .25, .5, .75, 1] }
 
 textosHistoria.forEach((el) => {
     observerHistoria.observe(el);
+})
+
+let nombresPersonajes = document.querySelectorAll(".info-personaje h1");
+console.log(nombresPersonajes[0]);
+
+window.addEventListener("scroll", () => {
+    let scrolled = window.scrollY;
+    let val = 200 - (scrolled * 0.1);
+    if (val > 0) {
+        nombresPersonajes[0].style.transform = `translateX(${val}vw)`
+    }
+    
 })
