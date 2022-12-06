@@ -45,9 +45,26 @@ console.log(nombresPersonajes[0]);
 
 window.addEventListener("scroll", () => {
     let scrolled = window.scrollY;
-    let val = 200 - (scrolled * 0.1);
-    if (val > 0) {
-        nombresPersonajes[0].style.transform = `translateX(${val}vw)`
-    }
+    
+
+    nombresPersonajes.forEach( el => {
+        let posTitle = el.getBoundingClientRect().y;
+        let animationStart = posTitle - window.innerHeight/2 - window.innerHeight/4;
+        let animationEnd = animationStart + window.innerHeight/4;
+        if ( animationStart < 0 && animationEnd >= 0 ) {
+            let offsetX = animationEnd * (200/(window.innerHeight/4));
+            const visibility = animationEnd/(window.innerHeight/4)
+            el.style.transform = `translateX(${offsetX}px)`;
+            el.style.opacity = 1 - visibility;
+        } else if (animationStart > 0){
+            el.style.opacity = 0;
+        }
+    })
     
 })
+
+window.addEventListener("scroll", scrollSection);
+
+function scrollSection() {
+    
+}

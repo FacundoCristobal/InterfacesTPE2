@@ -394,6 +394,7 @@ footer {
     width: 80%;
     padding: 1rem 10%;
     background-color: var(--primary);
+    height: 200vh;
 }
 
 footer .footerNav {
@@ -638,6 +639,7 @@ footer li {
     background-color: transparent;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.3);
     transform: translateX(-100%);
+    opacity: 0;
     display: block;
 }
 
@@ -682,6 +684,104 @@ footer li {
     transition-delay: 400ms;
 }
 
+.promo-section {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content:space-evenly;
+    align-self: flex-start;
+    top: -90px;
+    position: relative;
+}
+
+.promo-section .left-section {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    height: 400px;
+    
+}
+
+.promo-section .right-section {
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    
+    overflow: hidden;
+}
+
+.promo-img img{
+    width: 25vw;
+    
+}
+
+.promo-img {
+    width: 100%;
+    height: 400px;
+    top: 160px;
+    position: sticky;
+    display: none;
+    
+}
+
+.promo-section .left-section .showContent {
+    display: block;
+}
+
+.promo-text {
+    width: 25vw;
+}
+
+.promo-section p {
+    font-size: 1.4rem;
+}
+
+/*Clase que asigna la animacion de desaparicion*/
+.fade-in {
+    animation: ease 0.9s fadeOut-history forwards;
+}
+/*Clase que asigna la animacion de aparicion*/
+.fade-in.appear {
+    animation: ease 0.9s fadeIn-history forwards;
+}
+
+.showCard {
+    display: block;
+}
+/*Animacion aparicion seccion historia*/
+@keyframes fadeIn-history {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+/*Animacion desaparicion seccion historia*/
+@keyframes fadeOut-history {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/*Transicion de historia*/
+.slide-up {
+    transform: translateY(150px);
+    transition: transform 0.5s ease-in;
+    animation: ease 0.9s fadeOut-history forwards;
+}
+
+.slide-up.appear {
+    transform: translateY(0);
+    transition: transform 0.5s ease-in;
+    animation: ease 0.9s fadeIn-history forwards;
+}
 
 /*-------CAROUSEL------*/
 
