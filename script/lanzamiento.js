@@ -62,9 +62,3 @@ window.addEventListener("scroll", () => {
     })
     
 })
-
-window.addEventListener("scroll", scrollSection);
-
-function scrollSection() {
-    
-}
