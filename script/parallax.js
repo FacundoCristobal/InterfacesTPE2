@@ -4,6 +4,7 @@ window.addEventListener('scroll', (e) => {
     const sky = document.querySelector('#sky');
     const sun = document.querySelector('#sun');
     const logo = document.querySelector('#pl_logo');
+    const navLogo = document.querySelector('.logo');
 
     let scrolled = window.scrollY;
     let viewportHeight = window.innerHeight;
@@ -11,6 +12,12 @@ window.addEventListener('scroll', (e) => {
     let logoDisolveEnd = viewportHeight * .8;
     let skyRate = scrolled * 0.5;
     let sunRate = scrolled * .3;
+
+    if (scrolled > 0) {
+        navLogo.classList.remove('bigLogo');
+    } else {
+        navLogo.classList.add('bigLogo');
+    }
 
     sky.style.transform = 'translate3d(0px, ' + skyRate + 'px, 0px)';
     sun.style.transform = 'translate3d(0px, ' + sunRate + 'px, 0px)';
